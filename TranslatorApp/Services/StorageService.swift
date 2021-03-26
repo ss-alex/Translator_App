@@ -25,19 +25,19 @@ class StorageService: StorageServiceProtocol {
     }
     
     func add(translation: Translation) {
-        guard let entity = NSEntityDescription.entity(forEntityName: "Translations", in: context) else {
+        guard let entity = NSEntityDescription.entity(forEntityName: CoreData.enityName, in: context) else {
             return
         }
         
         let newTranslation = NSManagedObject(entity: entity, insertInto: context)
-        newTranslation.setValue(translation.input, forKey: "input")
-        newTranslation.setValue(translation.translation, forKey: "translation")
+        newTranslation.setValue(translation.input, forKey: CoreData.inputKey)
+        newTranslation.setValue(translation.translation, forKey: CoreData.translationKey)
         
         appDelegate.saveContext()
     }
     
     func getWordsFromDB() -> [Translation]? {
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Translations")
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: CoreData.enityName)
         fetchRequest.returnsObjectsAsFaults = false
         do {
             guard let result = try context.fetch(fetchRequest) as? [NSManagedObject],
@@ -47,11 +47,11 @@ class StorageService: StorageServiceProtocol {
             
             var words = [Translation]()
             result.forEach { x in
-                guard let input = x.value(forKey: "input") as? String else {
+                guard let input = x.value(forKey: CoreData.inputKey) as? String else {
                     return
                 }
                 
-                guard let translation = x.value(forKey: "translation") as? String else {
+                guard let translation = x.value(forKey: CoreData.translationKey) as? String else {
                     return
                 }
                 
@@ -64,7 +64,7 @@ class StorageService: StorageServiceProtocol {
     }
     
     func deleteAllTheWordsFromDB() {
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Translations")
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: CoreData.enityName)
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
         
         do {
@@ -75,10 +75,8 @@ class StorageService: StorageServiceProtocol {
     }
     
     func fetchWords(by key: String) -> [Translation]? {
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Translations")
-        //fetchRequest.predicate = NSPredicate(format: "input CONTAINS[cd] %@ OR translation CONTAINS[cd] %@", key, key)
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: CoreData.enityName)
         
-        //fetchRequest.predicate = NSPredicate(format: "input == %@", "\(key)")
         fetchRequest.predicate = NSPredicate(format: "input CONTAINS[cd] %@ OR translation CONTAINS[cd] %@", key, key)
         
         do {
@@ -90,17 +88,16 @@ class StorageService: StorageServiceProtocol {
             
             var words = [Translation]()
             result.forEach { x in
-                guard let input = x.value(forKey: "input") as? String else {
+                guard let input = x.value(forKey: CoreData.inputKey) as? String else {
                     return
                 }
                 
-                guard let translation = x.value(forKey: "translation") as? String else {
+                guard let translation = x.value(forKey: CoreData.translationKey) as? String else {
                     return
                 }
                 
                 words.append(Translation(input: input, translation: translation))
             }
-            print("words by key.count = \(words.count)")
             return words
             
         } catch {

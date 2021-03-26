@@ -32,11 +32,10 @@ class TranslatorVC: UIViewController, TranslatorViewProtocol {
     let separatorView = UIView()
     let outputLabel = UILabel()
     
-    let loaderView = UIActivityIndicatorView(style: .gray)
-    
-    //Properties:
+    let loaderView = UIActivityIndicatorView(style: .large)
+  
     var presenter: TranslatorPresenterProtocol!
-    var initializer: TranslatorInitializer = TranslatorInitializer()
+    var initializer: TranslatorInit = TranslatorInit()
     
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -165,7 +164,7 @@ class TranslatorVC: UIViewController, TranslatorViewProtocol {
             swapButton.centerXAnchor.constraint(equalTo: buttonsField.centerXAnchor),
             swapButton.widthAnchor.constraint(equalToConstant: 26)
         ])
-        swapButton.setImage(UIImage(systemName: "arrow.left.arrow.right"), for: .normal)
+        swapButton.setImage(Images.swap, for: .normal)
         swapButton.tintColor = .black
         swapButton.addTarget(self, action: #selector(swapLanguages), for: .touchUpInside)
     }
@@ -223,7 +222,7 @@ class TranslatorVC: UIViewController, TranslatorViewProtocol {
             inputTF.heightAnchor.constraint(equalToConstant: 26)
         ])
         inputTF.delegate = self
-        inputTF.text = "Type your text"
+        inputTF.text = Placeholder.type
     }
     
     func setupSeparatorView() {
@@ -256,7 +255,7 @@ class TranslatorVC: UIViewController, TranslatorViewProtocol {
                                                       y: 0,
                                                       width: self.view.frame.size.width,
                                                       height: 35))
-        let closeButton = UIBarButtonItem(title: "Close",
+        let closeButton = UIBarButtonItem(title: ButtonTitles.close,
                                           style: .plain,
                                           target: self,
                                           action: #selector(closeKeyboard))
@@ -265,7 +264,7 @@ class TranslatorVC: UIViewController, TranslatorViewProtocol {
                                      target: nil,
                                      action: nil)
         
-        let translateButton = UIBarButtonItem(title: "Translate",
+        let translateButton = UIBarButtonItem(title: ButtonTitles.translate,
                                               style: .plain,
                                               target: self,
                                               action: #selector(translate))
@@ -284,7 +283,7 @@ class TranslatorVC: UIViewController, TranslatorViewProtocol {
 extension UIViewController: UITextFieldDelegate {
     public func textFieldDidBeginEditing(_ textField: UITextField) {
         
-        if textField.text == "Type your text" {
+        if textField.text == Placeholder.type {
             textField.text = ""
             textField.textColor = .black
         }
@@ -292,7 +291,7 @@ extension UIViewController: UITextFieldDelegate {
     
     public func textFieldDidEndEditing(_ textField: UITextField) {
         if textField.text == "" {
-            textField.text = "Type your text"
+            textField.text = Placeholder.type
             textField.textColor = .systemGray3
         }
     }

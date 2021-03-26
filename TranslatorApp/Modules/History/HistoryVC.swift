@@ -29,14 +29,12 @@ class HistoryVC: UIViewController, HistoryVCProtocol {
         super.viewDidLoad()
         initializer.inititialize(vc: self)
         setupUI()
-        print("History - viewDidLoad")
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         presenter.configureWords()
         tableViewReloadData()
-        print("History - viewWillAppear")
     }
     
     func setupUI() {
@@ -46,6 +44,7 @@ class HistoryVC: UIViewController, HistoryVCProtocol {
         setupSearchBarView()
         setupSearchController()
         setupTableView()
+        view.backgroundColor = .systemYellow
     }
     
     //MARK:- User Logic Methods
@@ -57,7 +56,6 @@ class HistoryVC: UIViewController, HistoryVCProtocol {
     
     @objc func clearTableView() {
         presenter.emptyTableView()
-        print("All the words has been deleted.")
     }
     
     //MARK:- UI Methods
@@ -82,7 +80,7 @@ class HistoryVC: UIViewController, HistoryVCProtocol {
             navigationLabel.widthAnchor.constraint(equalToConstant: 60),
             navigationLabel.heightAnchor.constraint(equalToConstant: 22)
         ])
-        navigationLabel.text = "History"
+        navigationLabel.text = Navigation.history
     }
     
     func setupDeleteButton() {
@@ -95,7 +93,8 @@ class HistoryVC: UIViewController, HistoryVCProtocol {
             deleteButton.widthAnchor.constraint(equalToConstant: 26),
             deleteButton.heightAnchor.constraint(equalToConstant: 26)
         ])
-        deleteButton.setImage(UIImage(systemName: "xmark.bin"), for: .normal)
+        deleteButton.setImage(Images.delete?.withRenderingMode(.alwaysTemplate), for: .normal)
+        deleteButton.tintColor = .black
         deleteButton.addTarget(self, action: #selector(clearTableView), for: .touchUpInside)
     }
     
@@ -112,7 +111,7 @@ class HistoryVC: UIViewController, HistoryVCProtocol {
     }
     
     func setupSearchController() {
-        searchController.searchBar.placeholder = "Search"
+        searchController.searchBar.placeholder = Placeholder.search
         searchBarView.addSubview(searchController.searchBar)
         searchController.searchBar.sizeToFit()
         searchController.searchBar.frame.size.width = view.frame.size.width
@@ -132,7 +131,9 @@ class HistoryVC: UIViewController, HistoryVCProtocol {
         tableView.backgroundColor = .white
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.register(HistoryTableViewCell.self, forCellReuseIdentifier: "customCell")
+        tableView.register(HistoryTableViewCell.self, forCellReuseIdentifier: ReuseIdentifiers.customCell)
+        //нужно убрать, чтобы лишние строчки table view не отображались визуально
+        // убрать разделители
     }
     
 }
@@ -143,7 +144,7 @@ extension HistoryVC: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "customCell") as! HistoryTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: ReuseIdentifiers.customCell) as! HistoryTableViewCell
         
         let words = presenter.resultedWords
         let input = words[indexPath.row].input

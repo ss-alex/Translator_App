@@ -16,7 +16,7 @@ class LangListVC: UIViewController, LangListViewProtocol {
     let tableView = UITableView()
     
     var presenter: LangListPresenterProtocol!
-    var initializer: LangListInitializer = LangListInitializer()
+    var initializer: LangListInit = LangListInit()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,8 +31,6 @@ class LangListVC: UIViewController, LangListViewProtocol {
             self?.tableView.reloadData()
         }
     }
-    
-    
     
     //MARK:- UI Methods
     func setupUI() {
@@ -52,7 +50,7 @@ class LangListVC: UIViewController, LangListViewProtocol {
         ])
         tableView.backgroundColor = .white
         
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: ReuseIdentifiers.cell)
         tableView.dataSource = self
         tableView.delegate = self
     }
@@ -61,8 +59,9 @@ class LangListVC: UIViewController, LangListViewProtocol {
         let width = self.view.frame.width
         let navigationBar: UINavigationBar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: width, height: 44))
         self.view.addSubview(navigationBar)
-        let navigationItem = UINavigationItem(title: "Source language")
-        let cancelButton = UIBarButtonItem(image: UIImage(systemName: "multiply"), style: .done, target: self, action: #selector(dismissView))
+        let navigationItem = UINavigationItem(title: Navigation.title)
+        let cancelButton = UIBarButtonItem(image: Images.cancel?.withRenderingMode(.alwaysTemplate), style: .done, target: self, action: #selector(dismissView))
+        cancelButton.tintColor = .black
         navigationItem.leftBarButtonItem = cancelButton
         navigationBar.setItems([navigationItem], animated: false)
         navigationBar.backgroundColor = .systemYellow
@@ -83,7 +82,7 @@ extension LangListVC: UITableViewDelegate {
 
 extension LangListVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell")!
+        let cell = tableView.dequeueReusableCell(withIdentifier: ReuseIdentifiers.cell)!
         cell.textLabel?.text = presenter.languageNames[indexPath.row]
         return cell
     }

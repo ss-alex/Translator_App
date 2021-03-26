@@ -38,15 +38,12 @@ class LangListRouter: LangListRouterProtocol {
         guard let dataStore = self.dataStore else {
             return
         }
+        
         passDataToTranslatorVC(dataStore: dataStore, buttonType: &destinationDataStore)
        
         vc.dismiss(animated: true) {
             destinationVC.presenter.updateLanguages()
         }
-    }
-    
-    func customInitForView() {
-        
     }
     
     func passDataToTranslatorVC(dataStore: LangListDS, buttonType: inout TranslatorDS) {
@@ -62,23 +59,5 @@ class LangListRouter: LangListRouterProtocol {
         case .noType:
             break
         }
-    }
-}
-
-extension UIViewController {
-    var top: UIViewController? {
-        if let controller = self as? UINavigationController {
-            return controller.topViewController?.top
-        }
-        if let controller = self as? UISplitViewController {
-            return controller.viewControllers.last?.top
-        }
-        if let controller = self as? UITabBarController {
-            return controller.selectedViewController?.top
-        }
-        if let controller = presentedViewController {
-            return controller.top
-        }
-        return self
     }
 }

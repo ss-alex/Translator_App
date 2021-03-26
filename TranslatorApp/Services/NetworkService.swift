@@ -14,7 +14,9 @@ protocol NetworkServiceProtocol {
 }
 
 class NetworkService: NetworkServiceProtocol {
-    let baseUrl = "https://api.eu-gb.language-translator.watson.cloud.ibm.com/instances/547d2294-cbd7-48c8-8a9b-e8d78b3ccfda"
+    let baseUrl = Network.baseUrl
+    let apiKey = Network.apiKey
+    let version = Network.version
     
     var supportedLanguages: [Language] {
         var languages: [Language] = []
@@ -31,31 +33,10 @@ class NetworkService: NetworkServiceProtocol {
         request(text: text, fromLang: fromLang, toLang: toLang, completion: completion)
     }
     
-//    private func request(text: String,
-//                  fromLang: String,
-//                  toLang: String,
-//                  completion: @escaping (TranslationResult, Error?) -> ()) {
-//
-//        let authenticator = WatsonIAMAuthenticator(apiKey: "u049LFvP1fWJy6CITUE7En9MFxjd2unojj-3x4YoDeGd")
-//        let languageTranslator = LanguageTranslator(version: "2018-05-01", authenticator: authenticator)
-//        languageTranslator.serviceURL = "https://api.eu-gb.language-translator.watson.cloud.ibm.com/instances/547d2294-cbd7-48c8-8a9b-e8d78b3ccfda"
-//
-//        languageTranslator.translate(text: [text], modelID: "\(fromLang)-\(toLang)") { response, error in
-//
-//            guard let translation = response?.result else {
-//                print(error?.localizedDescription ?? "unknown error")
-//                return
-//            }
-//
-//            completion(translation, nil)
-//        }
-//    }
-    
     private func request(text: String,
                          fromLang: String,
                          toLang: String,
                          completion: @escaping (TranslationResult?, Error?) -> ()) {
-        let version = "2018-05-01"
         
         let parameters: [String : Any] = [
             "text": [text], "model_id": "\(fromLang)-\(toLang)"
@@ -76,7 +57,7 @@ class NetworkService: NetworkServiceProtocol {
         
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
-        request.addValue("Basic YXBpa2V5OnUwNDlMRnZQMWZXSnk2Q0lUVUU3RW45TUZ4amQydW5vamotM3g0WW9EZUdk", forHTTPHeaderField: "Authorization")
+        request.addValue("Basic \(apiKey)", forHTTPHeaderField: "Authorization")
         
         let task = session.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
 

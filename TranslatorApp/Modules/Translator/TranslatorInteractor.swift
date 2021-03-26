@@ -49,10 +49,10 @@ class TranslatorInteractor: TranslatorInteractorProtocol, TranslatorDS {
         networkService.translate(text: text, fromLang: fromLang, toLang: toLang) { [weak self] (response, error) in
             if error != nil {
                 self?.presenter.hideLoaderView()
-                self?.presenter.showAlertView(text: "Ошибка соединения")
+                self?.presenter.showAlertView(text: Errors.networkError)
             } else {
                 guard let translatedText = response?.translations[0].translation as String? else {
-                    self?.presenter.showAlertView(text: "Полученный результат не соответствует параметрам поиска")
+                    self?.presenter.showAlertView(text: Errors.responseError)
                     return
                 }
                 self?.presenter.hideLoaderView()

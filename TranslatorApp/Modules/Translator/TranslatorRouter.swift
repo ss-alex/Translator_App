@@ -14,7 +14,7 @@ protocol TranslatorRouterProtocol: class {
 
 class TranslatorRouter: TranslatorRouterProtocol {
     weak var viewContoller: TranslatorVC!
-    var dataStore: TranslatorDS? ///unused in that case & not need to be initiated
+    var dataStore: TranslatorDS? 
     
     init(viewContoller: TranslatorVC) {
         self.viewContoller = viewContoller

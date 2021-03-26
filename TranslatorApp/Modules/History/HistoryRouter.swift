@@ -21,10 +21,6 @@ class HistoryRouter: HistoryRouterProtocol {
     }
     
     func moveToTranslatorVC() {
-        //let tab = vc.tabBarController
-        //let destVC = tab?.viewControllers?.first as? TranslatorVC
-        //tab?.selectedIndex = 0
-        
         guard let tab = vc.tabBarController,
             let destVC = tab.viewControllers?.first as? TranslatorVC,
             var destDS = destVC.presenter?.router?.dataStore,

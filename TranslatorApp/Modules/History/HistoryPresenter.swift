@@ -27,7 +27,7 @@ class HistoryPresenter: HistoryPresenterProtocol {
         self.view = view
     }
     
-    func emptyTableView() { // посмотреть позже
+    func emptyTableView() {
         interactor.deleteAllTheWordsFromDB()
         configureWords()
         view.tableViewReloadData()
@@ -40,7 +40,6 @@ class HistoryPresenter: HistoryPresenterProtocol {
         }
         
         resultedWords = fetchedWords
-        print("--> resultedWords = \(resultedWords)")
     }
     
     func getFilteredWords(by text: String) {

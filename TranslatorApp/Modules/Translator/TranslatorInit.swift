@@ -7,11 +7,11 @@
 
 import UIKit
 
-protocol TranslatorInitializerProtocol: class {
+protocol TranslatorInitProtocol: class {
     func initialize(vc: TranslatorVC)
 }
 
-class TranslatorInitializer: TranslatorInitializerProtocol {
+class TranslatorInit: TranslatorInitProtocol {
     
     func initialize(vc: TranslatorVC) {
         let presenter = TranslatorPresenter(view: vc)

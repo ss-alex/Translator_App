@@ -7,11 +7,11 @@
 
 import UIKit
 
-protocol LangListInitializerProtocol: class {
+protocol LangListInitProtocol: class {
     func initialize(viewController: LangListVC)
 }
 
-class LangListInitializer: LangListInitializerProtocol {
+class LangListInit: LangListInitProtocol {
     
     func initialize(viewController: LangListVC) {
         let presenter = LangListPresenter(view: viewController)

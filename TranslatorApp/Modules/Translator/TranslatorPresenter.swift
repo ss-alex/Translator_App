@@ -88,11 +88,11 @@ class TranslatorPresenter: TranslatorPresenterProtocol {
         interactor.translate(text: text, fromLang: fromLang, toLang: toLang)
     }
     
-    func populateInputTF(text: String) { // метод 1
+    func populateInputTF(text: String) {
         view.populateInputTF(text: text)
     }
     
-    func populateOutputLabel(text: String) { // метод 2
+    func populateOutputLabel(text: String) { 
         view.pupulateOutputLabel(text: text)
     }
     

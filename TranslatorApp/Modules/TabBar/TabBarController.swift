@@ -18,16 +18,20 @@ class TabBarController: UITabBarController {
     
     private func setupTabBarItems() {
         let itemTranslate = UITabBarItem()
-        itemTranslate.title = "Translate"
-        itemTranslate.image = UIImage(systemName: "magnifyingglass")
+        itemTranslate.title = TabBarTitles.translate
+        itemTranslate.image = Images.translate
         
         let itemHistory = UITabBarItem()
-        itemHistory.title = "History"
-        itemHistory.image = UIImage(systemName: "folder")
+        itemHistory.title = TabBarTitles.history
+        itemHistory.image = Images.history
         
         translatorVC.tabBarItem = itemTranslate
         historyVC.tabBarItem = itemHistory
-        
         viewControllers = [translatorVC, historyVC]
+        setupDefaultStyle()
+    }
+    
+    private func setupDefaultStyle() {
+        UITabBar.appearance().tintColor = .label
     }
 }
