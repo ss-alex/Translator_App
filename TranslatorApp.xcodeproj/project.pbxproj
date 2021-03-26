@@ -12,6 +12,7 @@
 		D96442442605A8FB008ED900 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96442432605A8FB008ED900 /* Language.swift */; };
 		D96442472605A928008ED900 /* Translation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96442462605A928008ED900 /* Translation.swift */; };
 		D964A78B260B987D009EAAAF /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D964A78A260B987D009EAAAF /* HistoryTableViewCell.swift */; };
+		D97C7B0C260D8CF800832F7E /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D97C7B0B260D8CF800832F7E /* TabBarController.swift */; };
 		D9B8BAAD26054D98001D91CD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B8BAAC26054D98001D91CD /* AppDelegate.swift */; };
 		D9B8BAAF26054D98001D91CD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B8BAAE26054D98001D91CD /* SceneDelegate.swift */; };
 		D9B8BAB426054D98001D91CD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D9B8BAB226054D98001D91CD /* Main.storyboard */; };
@@ -44,6 +45,7 @@
 		D96442432605A8FB008ED900 /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
 		D96442462605A928008ED900 /* Translation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Translation.swift; sourceTree = "<group>"; };
 		D964A78A260B987D009EAAAF /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
+		D97C7B0B260D8CF800832F7E /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		D9B8BAA926054D98001D91CD /* TranslatorApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TranslatorApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9B8BAAC26054D98001D91CD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D9B8BAAE26054D98001D91CD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -89,6 +91,14 @@
 				D964A78A260B987D009EAAAF /* HistoryTableViewCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		D97C7B0A260D8CCA00832F7E /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				D97C7B0B260D8CF800832F7E /* TabBarController.swift */,
+			);
+			path = TabBar;
 			sourceTree = "<group>";
 		};
 		D9B8BAA026054D98001D91CD = {
@@ -164,6 +174,7 @@
 		D9B8BAFA26055142001D91CD /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				D97C7B0A260D8CCA00832F7E /* TabBar */,
 				D9B8BAC426054DD8001D91CD /* Translator */,
 				D9B8BAC526054DFE001D91CD /* LanguagesList */,
 				D9B8BAC626054E55001D91CD /* History */,
@@ -265,6 +276,7 @@
 				D9B8BACF26054F24001D91CD /* HistoryVC.swift in Sources */,
 				D9B8BAF126055077001D91CD /* HistoryRouter.swift in Sources */,
 				D9B8BACC26054F16001D91CD /* LangListVC.swift in Sources */,
+				D97C7B0C260D8CF800832F7E /* TabBarController.swift in Sources */,
 				D9B8BAD826054FB6001D91CD /* TranslatorInitializer.swift in Sources */,
 				D9B8BAE82605502E001D91CD /* LangListInitializer.swift in Sources */,
 				D9B8BAB726054D98001D91CD /* TranslatorApp.xcdatamodeld in Sources */,

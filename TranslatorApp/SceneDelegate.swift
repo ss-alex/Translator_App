@@ -18,25 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
         
-        let tabBarController = UITabBarController()
-        
-        let translatorVC = TranslatorVC()
-        translatorVC.tabBarItem = UITabBarItem(title: "Translate", image: UIImage(systemName: "magnifyingglass"), tag: 0)
-        let historyVC = HistoryVC()
-        historyVC.tabBarItem = UITabBarItem(title: "History", image: UIImage(systemName: "folder"), tag: 1)
-        tabBarController.viewControllers = [translatorVC, historyVC]
-        
-        /*let translatorVC = TranslatorVC()
-        translatorVC.title = "Translate"
-        translatorVC.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 0)
-        let x = UINavigationController(rootViewController: translatorVC)
-        
-        let historyVC = HistoryVC()
-        historyVC.title = "History"
-        historyVC.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 1)
-        let y = UINavigationController(rootViewController: historyVC)
-        tabBarController.viewControllers = [x, y]*/
-        
+        let tabBarController = TabBarController()
         window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
     }
